@@ -2,40 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
-
-var x=prompt("Enter Your choise of color","color");
-var y=prompt("Enter Your preferable Size","size");
-var z=prompt("Enter Your preferable price","price");
+// import './Skavastore.json';
+var data={
+  "classname" :["section-type"],
+  "sectioncontent": ["Refine","Brand","color","price"],
+  "sectioninner" :["Ujà vu (2)","grey (2)","0.0 TO 10000.0+ (2)"]
+},str=[],count=1;
 export default class Example extends React.Component{
   constructor(props){
     super(props);
-    this.state={
-      color:x,
-      size:y,
-      price:z
-    };
+    this.state={str1:""};
   }
-  // static getDerivedStateFromProps(props,state){
-  //   return{color:props.available};
-  // }
-  shouldComponentUpdate() {
-    return true;
+  func = ()=>{
+    for(var i=0;i<4;i++){
+      if(count<=4){
+    str.push(<div class="section-type">{data.sectioncontent[i]}</div>);
+    count+=1;
+      }
+    }
+    // return str;
   }
-  componentDidMount(){
-    setTimeout(this.setState({color:"Green"}),5000);
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    document.getElementById("root1").innerHTML =
-    "Before the update, the color was " + prevState.color;
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({str1:str})
+    }, 0)
   }
   render(){
     return(
-     <div id="example">
-        <h3>color : {this.state.color}</h3>
-        <h3>size : {this.state.size}</h3>
-        <h3>price : ${this.state.price}</h3>
-        <button id="style" onclick={this.dynamic}>Search</button>
+     <div id="main-box">
+        <div id="select-type">
+            {this. func()}
+            <p>{this.state.str1}</p>
+          </div>
       </div>
-    )
+    );
   }
 }
